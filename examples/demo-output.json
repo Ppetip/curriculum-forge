@@ -1,0 +1,61 @@
+{
+  "rows": 6,
+  "duplicates": [
+    {
+      "a": "a",
+      "b": "b",
+      "score": 1.0,
+      "kind": "exact"
+    }
+  ],
+  "manifest": [
+    {
+      "id": "a",
+      "family": "orders",
+      "source": "synthetic-demo",
+      "split": "eval",
+      "sha256": "b3665a988e98ae5219fb774676fde12a8256746a86f7687d7e53b4781fbd3dd2"
+    },
+    {
+      "id": "b",
+      "family": "orders-copy",
+      "source": "synthetic-demo",
+      "split": "eval",
+      "sha256": "0d07face0afa0cd67e05f65f48f67a01693582dee85ff91554cd096faefe50d3"
+    },
+    {
+      "id": "c",
+      "family": "refunds",
+      "source": "synthetic-demo",
+      "split": "train",
+      "sha256": "6ee5d13ea7f52b5a81c9c1875f71d19b3308e75fc3499bf90169bf59508c70a2"
+    },
+    {
+      "id": "d",
+      "family": "calendar",
+      "source": "synthetic-demo",
+      "split": "train",
+      "sha256": "1a4ab168be74c22c51d73ca96c76874e992e7b71bfccc18fbbcaa9e6bfb31c33"
+    },
+    {
+      "id": "e",
+      "family": "inventory",
+      "source": "synthetic-demo",
+      "split": "train",
+      "sha256": "41c4d16cd855c006ac67dd11ced2335969d84250b9e9fd9185faf953bbf43a36"
+    },
+    {
+      "id": "f",
+      "family": "exceptions",
+      "source": "synthetic-demo",
+      "split": "eval",
+      "sha256": "04575f51f215459c1f43eb53fd9413c595f25534becbef295849942d18c26137"
+    }
+  ],
+  "seed": 7,
+  "threshold": 0.85,
+  "requested_eval_fraction": 0.25,
+  "actual_eval_fraction": 0.5,
+  "warnings": [],
+  "limitation": "Token-set Jaccard detects lexical overlap, not semantic equivalence. O(n squared); designed for small datasets. No LLM has been trained."
+}

@@ -1,0 +1,6 @@
+{"id": "a", "text": "Extract order quantity and shipping address", "family": "orders", "source": "synthetic-demo"}
+{"id": "b", "text": "EXTRACT order quantity and shipping address!", "family": "orders-copy", "source": "synthetic-demo"}
+{"id": "c", "text": "Classify refund eligibility by purchase date", "family": "refunds", "source": "synthetic-demo"}
+{"id": "d", "text": "Find meeting start time and timezone", "family": "calendar", "source": "synthetic-demo"}
+{"id": "e", "text": "Identify duplicate inventory SKU records", "family": "inventory", "source": "synthetic-demo"}
+{"id": "f", "text": "Resolve cancellation exception in policy", "family": "exceptions", "source": "synthetic-demo"}
