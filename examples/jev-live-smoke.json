@@ -1,0 +1,15 @@
+{
+  "mode": "live-model-on-synthetic-data",
+  "model": "jev-1.13.0",
+  "semantic_review": "duplicate",
+  "lexical_similarity": 0.1,
+  "usage": [
+    {
+      "input_tokens": 397,
+      "output_tokens": 38
+    }
+  ],
+  "mutates_split": false,
+  "limitation": "Synthetic pair, advisory review only. No split edits or training. Human-confirmed duplicate groups must precede splitting.",
+  "recorded_at_utc": "2026-09-21"
+}
