@@ -21,4 +21,6 @@ Hosted verification: https://github.com/Ppetip/curriculum-forge/actions/runs/355
 
 Budget-fix hosted verification: https://github.com/Ppetip/curriculum-forge/actions/runs/35614378665
 
-2026-09-21 18:44 UTC: Dataset export checks row IDs, source, family, text hashes and split labels before creating output. Local tests and offline CLI checks pass; updated hosted matrix pending. No additional Jev calls.
+2026-09-21 18:44 UTC: Dataset export checks row IDs, source, family, text hashes and split labels before creating output. Local tests, offline CLI checks, and all four hosted matrix jobs pass. No additional Jev calls.
+
+Feature-pass verification: https://github.com/Ppetip/curriculum-forge/actions/runs/35640890162
