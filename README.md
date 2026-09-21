@@ -110,3 +110,5 @@ Live clients now open existing ledgers only, including at reservation time. A mi
 ## Latest reliability improvement
 
 `export_split` now rejects stale content or provenance, duplicate/missing manifest IDs, and unknown split labels before creating the destination. Re-audit edited rows before export. These are consistency checks, not a signature or proof of source truth; they do not defend against coordinated edits to both the rows and manifest.
+
+See [Reading results](docs/RESULTS.md) for outcome fields, denominators, abstentions and the limits of command success.
