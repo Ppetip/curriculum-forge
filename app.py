@@ -83,7 +83,23 @@ def demo():
 def export_split(rows, report, directory):
     """Write a fresh directory, refusing to overwrite any earlier dataset."""
     directory = Path(directory)
-    assignments = {r['id']: r['split'] for r in report['manifest']}
+    # Validate provenance against current bytes before creating any output.
+    audit(rows)
+    manifest = report.get('manifest') if isinstance(report, dict) else None
+    if not isinstance(manifest, list) or len(manifest) != len(rows):
+        raise ValueError('manifest must cover every row exactly once')
+    current = {r['id']: r for r in rows}
+    seen = set()
+    for entry in manifest:
+        if not isinstance(entry, dict) or entry.get('id') not in current or entry['id'] in seen:
+            raise ValueError('manifest IDs must match rows exactly once')
+        seen.add(entry['id'])
+        row = current[entry['id']]
+        if (entry.get('split') not in ('train', 'eval') or entry.get('family') != row['family']
+                or entry.get('source') != row['source']
+                or entry.get('sha256') != hashlib.sha256(row['text'].encode()).hexdigest()):
+            raise ValueError('stale or invalid manifest; audit the current rows again')
+    assignments = {r['id']: r['split'] for r in manifest}
     directory.mkdir(parents=True, exist_ok=False)
     for split in ('train', 'eval'):
         selected = [r for r in rows if assignments[r['id']] == split]

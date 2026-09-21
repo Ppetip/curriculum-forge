@@ -1,11 +1,11 @@
 # Status
 
 Stage: command-line prototype with optional live Jev integration.
-Verified: 32 offline tests pass; dry run and live synthetic Jev workflow pass.
+Verified: 35 offline tests pass; dry run and live synthetic Jev workflow pass.
 
-Latest: Jev flags a semantic duplicate despite lexical Jaccard similarity of 0.1. Split generation remains unchanged.
+Latest: Dataset export checks row IDs, source, family, text hashes and split labels before creating output.
 
-Next: Build a human-labeled duplicate-pair set to measure precision and recall.
+Next: Add a labeled semantic duplicate evaluation set; human judgments remain pending.
 
 Repository: https://github.com/Ppetip/curriculum-forge
 Budget: one shared $3 cumulative Jev allowance across the portfolio, never per project or cycle.
@@ -20,3 +20,5 @@ Hosted verification: https://github.com/Ppetip/curriculum-forge/actions/runs/355
 2026-09-21 14:42 UTC budget fix: live clients require an existing ledger; explicit initialization refuses overwrite. Added four regression cases for missing/deleted/empty ledgers and preserved spending. All local tests, CLI checks, and four hosted Windows/Linux Python 3.11/3.13 jobs pass. No additional Jev calls.
 
 Budget-fix hosted verification: https://github.com/Ppetip/curriculum-forge/actions/runs/35614378665
+
+2026-09-21 18:44 UTC: Dataset export checks row IDs, source, family, text hashes and split labels before creating output. Local tests and offline CLI checks pass; updated hosted matrix pending. No additional Jev calls.
