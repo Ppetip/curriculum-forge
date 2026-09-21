@@ -43,12 +43,18 @@ def audit(rows, threshold=0.85, eval_fraction=0.25, seed=7):
     for i in range(len(rows)): groups.setdefault(find(i), []).append(i)
     components = sorted(groups.values(), key=lambda g: min(rows[i]['id'] for i in g))
     random.Random(seed).shuffle(components)
-    split = {}; count = 0; target = max(1, round(len(rows)*eval_fraction)) if rows else 0
-    # Keep at least one component in train; never break a duplicate-connected group.
+    # Exact subset-sum over indivisible components: closest attainable row count.
+    target = len(rows) * eval_fraction
+    reachable = {0: ()}
     for pos, group in enumerate(components):
-        label = 'eval' if count < target and pos < len(components)-1 else 'train'
-        if label == 'eval': count += len(group)
-        for i in group: split[rows[i]['id']] = label
+        for size, chosen in list(reachable.items()):
+            reachable.setdefault(size + len(group), chosen + (pos,))
+    eligible = [size for size in reachable if 0 < size < len(rows)]
+    count = min(eligible, key=lambda size: (abs(size - target), size)) if eligible else 0
+    selected = set(reachable[count])
+    split = {}
+    for pos, group in enumerate(components):
+        for i in group: split[rows[i]['id']] = 'eval' if pos in selected else 'train'
     manifest = [{'id': r['id'], 'family': r['family'], 'source': r['source'], 'split': split[r['id']],
                  'sha256': hashlib.sha256(r['text'].encode()).hexdigest()} for r in rows]
     return {'rows': len(rows), 'duplicates': duplicates, 'manifest': manifest,

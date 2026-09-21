@@ -25,7 +25,7 @@ For commands using a file under `runs/`, create that directory first (`mkdir run
 python -m unittest discover -s tests -v
 ```
 
-13 tests passed locally on Python 3.13. Other Python versions have not yet been exercised.
+16 tests passed locally on Python 3.13. Other Python versions have not yet been exercised.
 
 ## Architecture
 
@@ -33,7 +33,7 @@ Normalization uses Unicode NFKC and case folding. Pairwise token-set Jaccard ide
 
 ## Reproduced example
 
-The six-row synthetic example detects one duplicate pair and assigns both members to the same split. Group indivisibility produces a 50% evaluation split despite a requested 25%; the report exposes both fractions.
+The six-row synthetic example detects one duplicate pair and assigns both members to the same split. The closest evaluation size is one of six rows (16.7%) versus the requested 25%; tied sizes favor the smaller set.
 
 See [the captured output](examples/demo-output.json). Rerun `python app.py` to reproduce it.
 
@@ -54,3 +54,9 @@ Choose a task you know well enough to judge examples, such as support tickets, p
 ## License
 
 Copyright (c) 2026 Ppetip. Original code is licensed under GNU GPL version 3 only; see [LICENSE](LICENSE).
+
+## Latest development pass
+
+Closest attainable group-size splits preserve duplicate and family groups.
+
+Exact subset-sum balances indivisible groups; ties favor the smaller evaluation set. This remains a small-dataset implementation.

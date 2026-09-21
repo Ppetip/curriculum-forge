@@ -13,14 +13,14 @@
       "id": "a",
       "family": "orders",
       "source": "synthetic-demo",
-      "split": "eval",
+      "split": "train",
       "sha256": "b3665a988e98ae5219fb774676fde12a8256746a86f7687d7e53b4781fbd3dd2"
     },
     {
       "id": "b",
       "family": "orders-copy",
       "source": "synthetic-demo",
-      "split": "eval",
+      "split": "train",
       "sha256": "0d07face0afa0cd67e05f65f48f67a01693582dee85ff91554cd096faefe50d3"
     },
     {
@@ -55,7 +55,7 @@
   "seed": 7,
   "threshold": 0.85,
   "requested_eval_fraction": 0.25,
-  "actual_eval_fraction": 0.5,
+  "actual_eval_fraction": 0.16666666666666666,
   "warnings": [],
   "limitation": "Token-set Jaccard detects lexical overlap, not semantic equivalence. O(n squared); designed for small datasets. No LLM has been trained."
 }
