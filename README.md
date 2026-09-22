@@ -120,3 +120,7 @@ Run `python pair_evaluation.py`, or use `--input pairs.json --threshold 0.85`. E
 ## Evaluation reliability
 
 Pair evaluation rejects repeated normalized text pairs, including reversed pairs and contradictory labels under different IDs. Each unordered normalized pair is counted once; remove duplicate rows and adjudicate conflicting labels before evaluation. Different pairs may share one text, so this guard does not guarantee statistical independence or prevent cross-split leakage.
+
+## Extended evaluation
+
+Added `examples/review-pairs.json` and [label-review instructions](docs/LABEL_REVIEW.md). Four synthetic support-ticket pairs have null labels and no similarity scores, so a reviewer can judge intent before seeing detector output. The evaluator intentionally rejects the unfinished template. Independent labels remain missing; no threshold tuning or new quality estimate is claimed.

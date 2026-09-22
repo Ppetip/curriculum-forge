@@ -3,9 +3,9 @@
 Stage: command-line prototype with optional live Jev integration.
 Verified: 41 offline tests pass; dry run and live synthetic Jev workflow pass.
 
-Latest: Pair evaluation rejects repeated normalized text pairs, including reversed pairs and contradictory labels under different IDs.
+Latest: Added `examples/review-pairs.json` and [label-review instructions](docs/LABEL_REVIEW.md).
 
-Next: Have independently reviewed pairs before tuning duplicate thresholds.
+Next: Obtain independent judgments for the blank pair template before tuning thresholds.
 
 Repository: https://github.com/Ppetip/curriculum-forge
 Budget: one shared $3 cumulative Jev allowance across the portfolio, never per project or cycle.
@@ -34,3 +34,5 @@ Evaluation-path verification: https://github.com/Ppetip/curriculum-forge/actions
 2026-09-22 10:48 UTC: Pair evaluation rejects repeated normalized text pairs, including reversed pairs and contradictory labels under different IDs. Each unordered normalized pair is counted once; remove duplicate rows and adjudicate conflicting labels before evaluation. Different pairs may share one text, so this guard does not guarantee statistical independence or prevent cross-split leakage. Published and verified: local checks and all four hosted matrix jobs pass. No new Jev calls.
 
 Reliability verification: https://github.com/Ppetip/curriculum-forge/actions/runs/35718640295
+
+2026-09-22 22:50 UTC: Added `examples/review-pairs.json` and [label-review instructions](docs/LABEL_REVIEW.md). Four synthetic support-ticket pairs have null labels and no similarity scores, so a reviewer can judge intent before seeing detector output. The evaluator intentionally rejects the unfinished template. Independent labels remain missing; no threshold tuning or new quality estimate is claimed. Common-runner checks pass. Documentation only; prior hosted code checks remain applicable. No new Jev calls.

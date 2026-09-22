@@ -1,0 +1,26 @@
+[
+  {
+    "id": "pause-vs-cancel",
+    "left": "Pause my subscription for one month",
+    "right": "Cancel my subscription permanently",
+    "duplicate": null
+  },
+  {
+    "id": "end-renewal",
+    "left": "Stop renewing my monthly membership",
+    "right": "Cancel my recurring plan",
+    "duplicate": null
+  },
+  {
+    "id": "refund-vs-credit",
+    "left": "Refund this purchase to my card",
+    "right": "Give me store credit for this purchase",
+    "duplicate": null
+  },
+  {
+    "id": "negation",
+    "left": "Cancel the order",
+    "right": "Do not cancel the order",
+    "duplicate": null
+  }
+]
