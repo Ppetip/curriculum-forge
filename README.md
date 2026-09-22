@@ -25,7 +25,7 @@ For commands using a file under `runs/`, create that directory first (`mkdir run
 python -m unittest discover -s tests -v
 ```
 
-35 tests pass on Windows and Linux with Python 3.11 and 3.13 (GitHub Actions).
+38 tests pass locally on Python 3.13; updated hosted matrix pending.
 
 ## Architecture
 
@@ -112,3 +112,7 @@ Live clients now open existing ledgers only, including at reservation time. A mi
 `export_split` now rejects stale content or provenance, duplicate/missing manifest IDs, and unknown split labels before creating the destination. Re-audit edited rows before export. These are consistency checks, not a signature or proof of source truth; they do not defend against coordinated edits to both the rows and manifest.
 
 See [Reading results](docs/RESULTS.md) for outcome fields, denominators, abstentions and the limits of command success.
+
+## New evaluation path
+
+Run `python pair_evaluation.py`, or use `--input pairs.json --threshold 0.85`. Each pair requires id, left, right and a boolean duplicate label. Undefined precision/recall denominators return null. The three author-labeled synthetic fixtures include an exact match, a missed paraphrase and an unrelated pair: precision 1.0 and recall 0.5 at the default threshold. This tiny fixture is not a representative benchmark; do not tune on a final test set.

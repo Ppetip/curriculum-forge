@@ -1,0 +1,37 @@
+{
+  "data": "author-labeled-synthetic-fixtures",
+  "pairs": 3,
+  "threshold": 0.85,
+  "counts": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 1,
+    "tn": 1
+  },
+  "precision": 1.0,
+  "recall": 0.5,
+  "decisions": [
+    {
+      "id": "exact",
+      "score": 1.0,
+      "predicted_duplicate": true,
+      "expected_duplicate": true,
+      "bucket": "tp"
+    },
+    {
+      "id": "paraphrase",
+      "score": 0.0,
+      "predicted_duplicate": false,
+      "expected_duplicate": true,
+      "bucket": "fn"
+    },
+    {
+      "id": "unrelated",
+      "score": 0.14285714285714285,
+      "predicted_duplicate": false,
+      "expected_duplicate": false,
+      "bucket": "tn"
+    }
+  ],
+  "limitation": "Labels require independent review. Do not tune on a final test set; lexical similarity is not semantic equivalence."
+}

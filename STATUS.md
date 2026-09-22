@@ -1,11 +1,11 @@
 # Status
 
 Stage: command-line prototype with optional live Jev integration.
-Verified: 35 offline tests pass; dry run and live synthetic Jev workflow pass.
+Verified: 38 offline tests pass; dry run and live synthetic Jev workflow pass.
 
-Latest: Dataset export checks row IDs, source, family, text hashes and split labels before creating output.
+Latest: Labeled-pair evaluation reports confusion counts, precision, recall and per-pair errors.
 
-Next: Add a labeled semantic duplicate evaluation set; human judgments remain pending.
+Next: Have independently reviewed pairs before tuning duplicate thresholds.
 
 Repository: https://github.com/Ppetip/curriculum-forge
 Budget: one shared $3 cumulative Jev allowance across the portfolio, never per project or cycle.
@@ -26,3 +26,5 @@ Budget-fix hosted verification: https://github.com/Ppetip/curriculum-forge/actio
 Feature-pass verification: https://github.com/Ppetip/curriculum-forge/actions/runs/35640890162
 
 2026-09-21 22:45 UTC: documented how to interpret this tool's outcomes separately from command success. The local Codex runner now shows a concise outcome summary for this project. Verified through common-runner checks and synthetic demo output; histories stay local.
+
+2026-09-22 02:46 UTC: Labeled-pair evaluation reports confusion counts, precision, recall and per-pair errors. Common-runner checks and new route pass locally; hosted verification pending. No new Jev calls.
