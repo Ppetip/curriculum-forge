@@ -1,9 +1,9 @@
 # Status
 
 Stage: command-line prototype with optional live Jev integration.
-Verified: 38 offline tests pass; dry run and live synthetic Jev workflow pass.
+Verified: 41 offline tests pass; dry run and live synthetic Jev workflow pass.
 
-Latest: Labeled-pair evaluation reports confusion counts, precision, recall and per-pair errors.
+Latest: Pair evaluation rejects repeated normalized text pairs, including reversed pairs and contradictory labels under different IDs.
 
 Next: Have independently reviewed pairs before tuning duplicate thresholds.
 
@@ -30,3 +30,5 @@ Feature-pass verification: https://github.com/Ppetip/curriculum-forge/actions/ru
 2026-09-22 02:46 UTC: Labeled-pair evaluation reports confusion counts, precision, recall and per-pair errors. Common-runner checks, new route and all four hosted jobs pass. No new Jev calls.
 
 Evaluation-path verification: https://github.com/Ppetip/curriculum-forge/actions/runs/35681194785
+
+2026-09-22 10:48 UTC: Pair evaluation rejects repeated normalized text pairs, including reversed pairs and contradictory labels under different IDs. Each unordered normalized pair is counted once; remove duplicate rows and adjudicate conflicting labels before evaluation. Different pairs may share one text, so this guard does not guarantee statistical independence or prevent cross-split leakage. Local tests pass; publication and hosted verification pending. No new Jev calls.

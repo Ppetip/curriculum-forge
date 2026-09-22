@@ -25,7 +25,7 @@ For commands using a file under `runs/`, create that directory first (`mkdir run
 python -m unittest discover -s tests -v
 ```
 
-38 tests pass on Windows and Linux with Python 3.11 and 3.13 (GitHub Actions).
+41 tests pass locally on Windows with Python 3.13; hosted verification for this update is pending.
 
 ## Architecture
 
@@ -116,3 +116,7 @@ See [Reading results](docs/RESULTS.md) for outcome fields, denominators, abstent
 ## New evaluation path
 
 Run `python pair_evaluation.py`, or use `--input pairs.json --threshold 0.85`. Each pair requires id, left, right and a boolean duplicate label. Undefined precision/recall denominators return null. The three author-labeled synthetic fixtures include an exact match, a missed paraphrase and an unrelated pair: precision 1.0 and recall 0.5 at the default threshold. This tiny fixture is not a representative benchmark; do not tune on a final test set.
+
+## Evaluation reliability
+
+Pair evaluation rejects repeated normalized text pairs, including reversed pairs and contradictory labels under different IDs. Each unordered normalized pair is counted once; remove duplicate rows and adjudicate conflicting labels before evaluation. Different pairs may share one text, so this guard does not guarantee statistical independence or prevent cross-split leakage.

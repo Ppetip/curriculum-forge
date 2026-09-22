@@ -11,12 +11,17 @@ def evaluate_pairs(pairs, threshold=.85):
         raise ValueError("threshold must lie in (0, 1]")
     if not isinstance(pairs, list):
         raise ValueError("pairs must be an array")
+    pair_keys = set()
     ids, counts, decisions = set(), {"tp":0,"fp":0,"fn":0,"tn":0}, []
     for pair in pairs:
         if (not isinstance(pair, dict) or not isinstance(pair.get("id"), str) or not pair["id"]
                 or pair["id"] in ids or type(pair.get("duplicate")) is not bool
                 or any(not isinstance(pair.get(k), str) or not normalize(pair[k]) for k in ("left","right"))):
             raise ValueError("unique IDs, nonempty text pairs and boolean labels required")
+        key = tuple(sorted((normalize(pair["left"]), normalize(pair["right"]))))
+        if key in pair_keys:
+            raise ValueError("repeated normalized text pair; each pair must be evaluated once")
+        pair_keys.add(key)
         ids.add(pair["id"])
         score = similarity(pair["left"], pair["right"])
         predicted, actual = score >= threshold, pair["duplicate"]
