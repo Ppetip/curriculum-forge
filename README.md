@@ -25,7 +25,7 @@ For commands using a file under `runs/`, create that directory first (`mkdir run
 python -m unittest discover -s tests -v
 ```
 
-41 tests pass on Windows and Linux with Python 3.11 and 3.13 (GitHub Actions).
+45 tests and 3 offline CLI checks pass locally. Hosted verification for the export leakage fix is pending; the preceding 41-test revision passed Windows/Linux Python 3.11/3.13 checks.
 
 ## Architecture
 
@@ -109,7 +109,7 @@ Live clients now open existing ledgers only, including at reservation time. A mi
 
 ## Latest reliability improvement
 
-`export_split` now rejects stale content or provenance, duplicate/missing manifest IDs, and unknown split labels before creating the destination. Re-audit edited rows before export. These are consistency checks, not a signature or proof of source truth; they do not defend against coordinated edits to both the rows and manifest.
+`export_split` rejects stale content or provenance, duplicate/missing manifest IDs, and unknown split labels before creating the destination. It also recomputes lexical duplicates using the report's declared threshold and refuses assignments that split any duplicate or task-family group across train and evaluation. A missing or invalid threshold fails before creating output. This protects against edited split labels despite unchanged row hashes. Re-audit edited rows before export. These are consistency checks, not a signature or proof of source truth; they do not defend against coordinated edits to both the rows and manifest.
 
 See [Reading results](docs/RESULTS.md) for outcome fields, denominators, abstentions and the limits of command success.
 

@@ -84,8 +84,13 @@ def export_split(rows, report, directory):
     """Write a fresh directory, refusing to overwrite any earlier dataset."""
     directory = Path(directory)
     # Validate provenance against current bytes before creating any output.
-    audit(rows)
-    manifest = report.get('manifest') if isinstance(report, dict) else None
+    if not isinstance(report, dict):
+        raise ValueError('report must be an audit object')
+    threshold = report.get('threshold')
+    if type(threshold) not in (int, float) or not 0 < threshold <= 1:
+        raise ValueError('report requires a valid audit threshold')
+    checked = audit(rows, threshold=threshold)
+    manifest = report.get('manifest')
     if not isinstance(manifest, list) or len(manifest) != len(rows):
         raise ValueError('manifest must cover every row exactly once')
     current = {r['id']: r for r in rows}
@@ -100,6 +105,15 @@ def export_split(rows, report, directory):
                 or entry.get('sha256') != hashlib.sha256(row['text'].encode()).hexdigest()):
             raise ValueError('stale or invalid manifest; audit the current rows again')
     assignments = {r['id']: r['split'] for r in manifest}
+    # Hashes alone cannot detect edited split labels that introduce leakage.
+    family_splits = {}
+    for row in rows:
+        split = assignments[row['id']]
+        if family_splits.setdefault(row['family'], split) != split:
+            raise ValueError('manifest splits a task family across train and eval')
+    for pair in checked['duplicates']:
+        if assignments[pair['a']] != assignments[pair['b']]:
+            raise ValueError('manifest splits a duplicate group across train and eval')
     directory.mkdir(parents=True, exist_ok=False)
     for split in ('train', 'eval'):
         selected = [r for r in rows if assignments[r['id']] == split]
