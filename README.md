@@ -25,7 +25,7 @@ For commands using a file under `runs/`, create that directory first (`mkdir run
 python -m unittest discover -s tests -v
 ```
 
-45 tests and 3 offline CLI checks pass locally. Hosted verification for the export leakage fix is pending; the preceding 41-test revision passed Windows/Linux Python 3.11/3.13 checks.
+45 tests pass on Windows and Linux with Python 3.11 and 3.13 (GitHub Actions).
 
 ## Architecture
 

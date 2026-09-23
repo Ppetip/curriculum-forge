@@ -1,7 +1,7 @@
 # Status
 
 Stage: command-line prototype with optional live Jev integration.
-Verified: 45 offline tests and 3 CLI smoke checks pass locally; hosted checks for this change are pending. The historical live synthetic Jev check is unchanged.
+Verified: 45 offline tests and all four hosted matrix jobs pass. Jev smoke results remain historical; no new live calls.
 
 Latest: Export refuses edited assignments that split duplicate or task-family groups before writing files.
 
@@ -37,4 +37,6 @@ Reliability verification: https://github.com/Ppetip/curriculum-forge/actions/run
 
 2026-09-22 22:50 UTC: Added `examples/review-pairs.json` and [label-review instructions](docs/LABEL_REVIEW.md). Four synthetic support-ticket pairs have null labels and no similarity scores, so a reviewer can judge intent before seeing detector output. The evaluator intentionally rejects the unfinished template. Independent labels remain missing; no threshold tuning or new quality estimate is claimed. Common-runner checks pass. Documentation only; prior hosted code checks remain applicable. No new Jev calls.
 
-2026-09-23 06:53 UTC: Export recomputes duplicate edges at the declared audit threshold and rejects cross-split family/duplicate assignments, even when all content hashes still match. Missing/invalid thresholds fail closed. Four regression tests cover exact duplicates, family links, custom thresholds and invalid threshold metadata; rejected exports create no destination. Common-runner checks: 45 tests and 3 offline CLI paths pass. Run ID: `ae94f89edbea4bbdbc0b02564108d9f3`. Hosted verification pending. No API calls or independent pair judgments were added; label collection remains pending.
+2026-09-23 06:53 UTC: Export recomputes duplicate edges at the declared audit threshold and rejects cross-split family/duplicate assignments, even when all content hashes still match. Missing/invalid thresholds fail closed. Four regression tests cover exact duplicates, family links, custom thresholds and invalid threshold metadata; rejected exports create no destination. Common-runner checks: 45 tests and 3 offline CLI paths pass. Run ID: `ae94f89edbea4bbdbc0b02564108d9f3`. Hosted verification passed on all four OS/Python combinations. No API calls or independent pair judgments were added; label collection remains pending.
+
+2026-09-23 10:54 UTC verification follow-up: Published code and all four hosted jobs verified after the earlier approval-review usage-limit interruption. Existing check suites were not rerun solely to create history. Run: https://github.com/Ppetip/curriculum-forge/actions/runs/35829387901
