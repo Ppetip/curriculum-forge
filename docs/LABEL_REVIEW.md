@@ -11,3 +11,11 @@ Define duplicate as: the same requested action, material constraints and intende
 5. Inspect false positives and false negatives. This small review set is development data, not a final test set or a representative precision/recall estimate. Freeze a separate reviewed holdout before threshold tuning.
 
 No labels have been approved by a human yet. Do not count the template as labeled evaluation evidence or publish private reviewer notes without authorization.
+
+## Compare independent label reviews
+
+After reviewers label separate local copies, run `python review_agreement.py --left /absolute/path/reviewer-a.json --right /absolute/path/reviewer-b.json`. This read-only command reports agreement, disagreement, unreviewed pairs (at least one null label), and pairs present in only one review. It computes no detector scores, chooses no winning label and writes no merged dataset. Invalid labels, duplicate IDs or repeated normalized pairs stop the command with an error.
+
+Pairs match by normalized unordered text, so reversed text order or different reviewer IDs still match. The same ID on different text is reported as separate unmatched pairs. Each decision keeps both IDs and labels but omits source text and extra reviewer metadata. `agreement_rate` divides agreements by pairs with boolean labels in both reviews; it is null if that denominator is zero. Report coverage and disagreements alongside the rate: missing work must not look like agreement.
+
+Agreement does not prove correctness or independent review. Adjudicate disagreements using the task definition before running the detector evaluation. `evaluate_pairs` still rejects null labels. The CLI smoke check compares the blank synthetic template with itself only to exercise the unreviewed path; it is not a second review or evidence of human agreement. Reviewer files and notes stay local unless separately authorized for publication.

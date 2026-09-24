@@ -1,9 +1,9 @@
 # Status
 
 Stage: command-line prototype with optional live Jev integration.
-Verified: 45 offline tests and all four hosted matrix jobs pass. Jev smoke results remain historical; no new live calls.
+Verified: 51 tests and four offline CLI paths pass locally; hosted checks for this change pending. Jev smoke results remain historical; no new live calls.
 
-Latest: Export refuses edited assignments that split duplicate or task-family groups before writing files.
+Latest: Compare two label reviews without detector scores or automatic adjudication.
 
 Next: Obtain independent judgments for the blank pair template before tuning thresholds.
 
@@ -42,3 +42,5 @@ Reliability verification: https://github.com/Ppetip/curriculum-forge/actions/run
 2026-09-23 10:54 UTC verification follow-up: Published code and all four hosted jobs verified after the earlier approval-review usage-limit interruption. Existing check suites were not rerun solely to create history. Run: https://github.com/Ppetip/curriculum-forge/actions/runs/35829387901
 
 2026-09-23 14:55 UTC: Added guidance for interpreting saved-check freshness in the optional local Codex runner. A current check validates the audit/export code and its fixtures. It does not re-audit an external dataset or approve the unfinished human-review labels. The shared runner now records check-source fingerprints and provides read-only status. All five current app checks passed (234 tests total), along with 24 local runner regressions. Run ID: 811900b822db42e390b5e1714afbbe25. App implementation unchanged; this documentation update skips redundant hosted CI. No live calls or new performance claim.
+
+2026-09-24 19:00 UTC: Added read-only reviewer comparison with normalized pair matching, coverage counts, explicit disagreements and null agreement rate when no pair has two labels. No labels were supplied or approved; the original blank template remains unchanged. Local check bcb0447e92c3448a8f831c4445e3f44c passed. Hosted verification pending. No live calls or training.

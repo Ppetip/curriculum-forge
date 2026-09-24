@@ -24,3 +24,11 @@ When using the optional AI Lab workspace integration, run `python lab.py status`
 Fingerprints cover project Python files, tests, checked-in example JSON/JSONL paths, workflow YAML and shared runner Python files. They omit documentation, .env, databases, private run outputs and arbitrary analysis input files. Current does not prove unchanged external dependencies or OS state. Saved reports are private local cache records, not signed attestations. A later demo never replaces a check result, and a current failing check is still a failure.
 
 A current check validates the audit/export code and its fixtures. It does not re-audit an external dataset or approve the unfinished human-review labels.
+
+## Compare independent label reviews
+
+After reviewers label separate local copies, run `python review_agreement.py --left /absolute/path/reviewer-a.json --right /absolute/path/reviewer-b.json`. This read-only command reports agreement, disagreement, unreviewed pairs (at least one null label), and pairs present in only one review. It computes no detector scores, chooses no winning label and writes no merged dataset. Invalid labels, duplicate IDs or repeated normalized pairs stop the command with an error.
+
+Pairs match by normalized unordered text, so reversed text order or different reviewer IDs still match. The same ID on different text is reported as separate unmatched pairs. Each decision keeps both IDs and labels but omits source text and extra reviewer metadata. `agreement_rate` divides agreements by pairs with boolean labels in both reviews; it is null if that denominator is zero. Report coverage and disagreements alongside the rate: missing work must not look like agreement.
+
+Agreement does not prove correctness or independent review. Adjudicate disagreements using the task definition before running the detector evaluation. `evaluate_pairs` still rejects null labels. The CLI smoke check compares the blank synthetic template with itself only to exercise the unreviewed path; it is not a second review or evidence of human agreement. Reviewer files and notes stay local unless separately authorized for publication.

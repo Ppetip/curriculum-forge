@@ -6,16 +6,15 @@ from pathlib import Path
 from app import similarity, normalize
 
 
-def evaluate_pairs(pairs, threshold=.85):
-    if type(threshold) not in (int, float) or not 0 < threshold <= 1:
-        raise ValueError("threshold must lie in (0, 1]")
+def validate_pairs(pairs, allow_unreviewed=False):
     if not isinstance(pairs, list):
         raise ValueError("pairs must be an array")
     pair_keys = set()
-    ids, counts, decisions = set(), {"tp":0,"fp":0,"fn":0,"tn":0}, []
+    ids = set()
     for pair in pairs:
         if (not isinstance(pair, dict) or not isinstance(pair.get("id"), str) or not pair["id"]
-                or pair["id"] in ids or type(pair.get("duplicate")) is not bool
+                or pair["id"] in ids or "duplicate" not in pair
+                or not (type(pair["duplicate"]) is bool or (allow_unreviewed and pair["duplicate"] is None))
                 or any(not isinstance(pair.get(k), str) or not normalize(pair[k]) for k in ("left","right"))):
             raise ValueError("unique IDs, nonempty text pairs and boolean labels required")
         key = tuple(sorted((normalize(pair["left"]), normalize(pair["right"]))))
@@ -23,6 +22,15 @@ def evaluate_pairs(pairs, threshold=.85):
             raise ValueError("repeated normalized text pair; each pair must be evaluated once")
         pair_keys.add(key)
         ids.add(pair["id"])
+    return pairs
+
+
+def evaluate_pairs(pairs, threshold=.85):
+    if type(threshold) not in (int, float) or not 0 < threshold <= 1:
+        raise ValueError("threshold must lie in (0, 1]")
+    validate_pairs(pairs)
+    counts, decisions = {"tp":0,"fp":0,"fn":0,"tn":0}, []
+    for pair in pairs:
         score = similarity(pair["left"], pair["right"])
         predicted, actual = score >= threshold, pair["duplicate"]
         bucket = "tp" if predicted and actual else "fp" if predicted else "fn" if actual else "tn"

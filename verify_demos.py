@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parent
 COMMANDS = [['app.py'], ['jev_workflow.py']]
 
 COMMANDS.append(['pair_evaluation.py'])
+COMMANDS.append(['review_agreement.py', '--left', 'examples/review-pairs.json', '--right', 'examples/review-pairs.json'])
 
 def main():
     for args in COMMANDS:
