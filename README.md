@@ -132,3 +132,7 @@ After reviewers label separate local copies, run `python review_agreement.py --l
 Pairs match by normalized unordered text, so reversed text order or different reviewer IDs still match. The same ID on different text is reported as separate unmatched pairs. Each decision keeps both IDs and labels but omits source text and extra reviewer metadata. `agreement_rate` divides agreements by pairs with boolean labels in both reviews; it is null if that denominator is zero. Report coverage and disagreements alongside the rate: missing work must not look like agreement.
 
 Agreement does not prove correctness or independent review. Adjudicate disagreements using the task definition before running the detector evaluation. `evaluate_pairs` still rejects null labels. The CLI smoke check compares the blank synthetic template with itself only to exercise the unreviewed path; it is not a second review or evidence of human agreement. Reviewer files and notes stay local unless separately authorized for publication.
+
+## Optional local CLI integration
+
+In an AI Lab workspace with the optional local runner, use `python lab.py run curriculum-forge review-agreement`. Its default compares the blank example with itself and reports zero pairs labeled in both reviews. For explicitly authorized reviews, supply both `--input /absolute/path/reviewer-a.json` and `--reference /absolute/path/reviewer-b.json`. Saved output stays local; no detector inference or automatic adjudication runs. This repository does not bundle lab.py; use review_agreement.py directly in a standalone clone.
