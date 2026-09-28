@@ -25,7 +25,7 @@ For commands using a file under `runs/`, create that directory first (`mkdir run
 python -m unittest discover -s tests -v
 ```
 
-53 tests and four offline CLI paths pass on Windows and Linux with Python 3.11 and 3.13 (GitHub Actions).
+59 tests and five offline CLI paths pass locally; hosted verification for threshold comparison is pending.
 
 ## Architecture
 
@@ -136,3 +136,11 @@ Agreement does not prove correctness or independent review. Adjudicate disagreem
 ## Optional local CLI integration
 
 In an AI Lab workspace with the optional local runner, use `python lab.py run curriculum-forge review-agreement`. Its default compares the blank example with itself and reports zero pairs labeled in both reviews. For explicitly authorized reviews, supply both `--input /absolute/path/reviewer-a.json` and `--reference /absolute/path/reviewer-b.json`. Saved output stays local; no detector inference or automatic adjudication runs. This repository does not bundle lab.py; use review_agreement.py directly in a standalone clone.
+
+## Compare lexical thresholds before choosing one
+
+Run `python threshold_comparison.py --input examples/threshold-pairs.json --thresholds 0.5 0.7 1` for an author-labeled synthetic example. For your own development set, pass an explicitly authorized pair-array file with independently reviewed boolean labels. The original blank review-pairs.json template remains unreviewed and is rejected until labels are supplied.
+
+The command accepts 1 to 20 distinct thresholds in (0, 1], preserving the requested order. All thresholds and pair labels are validated before any scoring; malformed values, null labels and repeated normalized pairs fail with no comparison output. Each row reports confusion counts, precision, recall, false-positive IDs and false-negative IDs. Undefined ratios are null, including empty input. Predictions use score >= threshold, matching pair_evaluation.py. No threshold is selected or applied, no input file is modified, and no training or network request occurs.
+
+Use a development set to choose a threshold against the costs of missed duplicates and false matches. Freeze it before evaluating a separate final test set; repeated comparisons on the same labels are not independent performance estimates. Lexical overlap is not semantic equivalence. Author labels in the supplied example verify code behavior only; they do not resolve the pending human review or demonstrate production quality. Output omits raw pair text and extra metadata, but pair IDs can still be sensitive, so keep authorized private reports local.

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "exact",
+    "left": "Cancel my plan",
+    "right": "CANCEL my plan!",
+    "duplicate": true
+  },
+  {
+    "id": "shortened",
+    "left": "cancel monthly subscription",
+    "right": "cancel subscription",
+    "duplicate": true
+  },
+  {
+    "id": "different-term",
+    "left": "cancel monthly plan",
+    "right": "cancel annual plan",
+    "duplicate": false
+  },
+  {
+    "id": "unrelated",
+    "left": "Find a meeting time",
+    "right": "Refund a broken order",
+    "duplicate": false
+  }
+]

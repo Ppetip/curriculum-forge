@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parent
 COMMANDS = [['app.py'], ['jev_workflow.py']]
 
 COMMANDS.append(['pair_evaluation.py'])
+COMMANDS.append(['threshold_comparison.py', '--input', 'examples/threshold-pairs.json', '--thresholds', '0.5', '0.7', '1'])
 COMMANDS.append(['review_agreement.py', '--left', 'examples/review-pairs.json', '--right', 'examples/review-pairs.json'])
 
 def main():
