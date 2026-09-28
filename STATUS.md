@@ -1,7 +1,7 @@
 # Status
 
 Stage: command-line prototype with optional live Jev integration.
-Verified: 59 tests and five offline CLI paths pass locally; hosted checks for this change pending. Jev smoke results remain historical; no new live calls.
+Verified: 59 tests and five offline CLI paths pass locally; all four hosted checks pass. Jev smoke results remain historical; no new live calls.
 
 Latest: Compare explicit lexical thresholds with error IDs, without automatic selection or application.
 
@@ -55,4 +55,6 @@ Review-agreement verification: https://github.com/Ppetip/curriculum-forge/action
 
 Pricing-review verification: https://github.com/Ppetip/curriculum-forge/actions/runs/36441142826
 
-2026-09-28 23:00 UTC: Added bounded threshold comparison with full preflight, confusion counts, nullable precision/recall and false-positive/false-negative IDs. Six regressions cover tradeoffs, order/parity, invalid thresholds, unfinished/repeated labels, empty data and text/metadata omission. Local check 6253dad59e924841806058d6c3afb1ea passed. Hosted verification pending. Synthetic example labels are authored, not independent review; no threshold chosen, training or paid calls.
+2026-09-28 23:00 UTC: Added bounded threshold comparison with full preflight, confusion counts, nullable precision/recall and false-positive/false-negative IDs. Six regressions cover tradeoffs, order/parity, invalid thresholds, unfinished/repeated labels, empty data and text/metadata omission. Local check 6253dad59e924841806058d6c3afb1ea passed. All four hosted Windows/Linux Python 3.11/3.13 jobs pass. Synthetic example labels are authored, not independent review; no threshold chosen, training or paid calls.
+
+Threshold-comparison verification: https://github.com/Ppetip/curriculum-forge/actions/runs/36496054658
