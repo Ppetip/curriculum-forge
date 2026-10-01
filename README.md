@@ -25,7 +25,7 @@ For commands using a file under `runs/`, create that directory first (`mkdir run
 python -m unittest discover -s tests -v
 ```
 
-59 tests and five offline CLI paths pass on Windows and Linux with Python 3.11 and 3.13 (GitHub Actions).
+62 tests and five offline CLI paths pass locally; hosted verification for score reuse is pending.
 
 ## Architecture
 
@@ -146,3 +146,20 @@ The command accepts 1 to 20 distinct thresholds in (0, 1], preserving the reques
 Use a development set to choose a threshold against the costs of missed duplicates and false matches. Freeze it before evaluating a separate final test set; repeated comparisons on the same labels are not independent performance estimates. Lexical overlap is not semantic equivalence. Author labels in the supplied example verify code behavior only; they do not resolve the pending human review or demonstrate production quality. Output omits raw pair text and extra metadata, but pair IDs can still be sensitive, so keep authorized private reports local.
 
 In the optional local AI Lab workspace, run `python lab.py run curriculum-forge threshold-comparison`, optionally adding `--input ABSOLUTE_PATH` for authorized reviewed development pairs. This convenience route compares the fixed demonstration values 0.5, 0.7 and 1.0 and saves a private result showing error counts without selecting a threshold. Use `python lab.py report RUN_ID` to inspect it. For other values, use the standalone threshold_comparison.py command above. The local runner is not bundled in a standalone repository clone.
+
+## Reuse lexical scores across thresholds
+
+A threshold comparison now computes each pair's lexical similarity once, then
+reuses that score across the requested thresholds. Threshold order, confusion
+counts, precision/recall, error IDs and the inclusive score boundary remain the
+same as standalone pair evaluation. All thresholds and pair labels are validated
+before scoring. Empty input still has zero counts and undefined quality ratios.
+
+Reuse is local to that one comparison: no persistent or cross-run cache is created,
+and changed inputs are rescored on the next call. The temporary score records hold
+IDs, numeric scores and labels, not copied pair text. Output still omits raw text;
+IDs may be sensitive and authorized private reports must stay local. A regression
+checks two similarity calls for two pairs across twenty thresholds, along with
+metric parity. This is a verified reduction in scoring calls, not a measured
+wall-clock speedup or a change in model quality. No threshold is selected or
+applied; independent label review and final-test separation remain necessary.

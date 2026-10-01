@@ -3,7 +3,7 @@
 import argparse
 import json
 from pathlib import Path
-from pair_evaluation import evaluate_pairs, validate_pairs
+from pair_evaluation import evaluate_pairs, validate_pairs, _summarize_scores
 
 
 def compare_thresholds(pairs, thresholds):
@@ -14,9 +14,11 @@ def compare_thresholds(pairs, thresholds):
     if len(set(thresholds)) != len(thresholds):
         raise ValueError('thresholds must be distinct')
     validate_pairs(pairs)  # Reject missing labels and repeated pairs before scoring.
+    first = evaluate_pairs(pairs, thresholds[0])
+    scored = [(d['id'], d['score'], d['expected_duplicate']) for d in first['decisions']]
     comparisons = []
-    for threshold in thresholds:
-        result = evaluate_pairs(pairs, threshold)
+    for index, threshold in enumerate(thresholds):
+        result = first if index == 0 else _summarize_scores(scored, threshold)
         comparisons.append({k: result[k] for k in ('threshold', 'counts', 'precision', 'recall')})
         comparisons[-1].update(
             false_positive_ids=[d['id'] for d in result['decisions'] if d['bucket'] == 'fp'],

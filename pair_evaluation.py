@@ -29,15 +29,20 @@ def evaluate_pairs(pairs, threshold=.85):
     if type(threshold) not in (int, float) or not 0 < threshold <= 1:
         raise ValueError("threshold must lie in (0, 1]")
     validate_pairs(pairs)
+    scored = [(pair["id"], similarity(pair["left"], pair["right"]), pair["duplicate"]) for pair in pairs]
+    return _summarize_scores(scored, threshold)
+
+
+def _summarize_scores(scored, threshold):
+    """Internal aggregation of already validated/scored pairs; no text retained."""
     counts, decisions = {"tp":0,"fp":0,"fn":0,"tn":0}, []
-    for pair in pairs:
-        score = similarity(pair["left"], pair["right"])
-        predicted, actual = score >= threshold, pair["duplicate"]
+    for pair_id, score, actual in scored:
+        predicted = score >= threshold
         bucket = "tp" if predicted and actual else "fp" if predicted else "fn" if actual else "tn"
         counts[bucket] += 1
-        decisions.append({"id":pair["id"],"score":score,"predicted_duplicate":predicted,"expected_duplicate":actual,"bucket":bucket})
+        decisions.append({"id":pair_id,"score":score,"predicted_duplicate":predicted,"expected_duplicate":actual,"bucket":bucket})
     tp,fp,fn = counts["tp"],counts["fp"],counts["fn"]
-    return {"pairs":len(pairs),"threshold":threshold,"counts":counts,
+    return {"pairs":len(scored),"threshold":threshold,"counts":counts,
             "precision":tp/(tp+fp) if tp+fp else None,"recall":tp/(tp+fn) if tp+fn else None,
             "decisions":decisions,"limitation":"Labels require independent review. Do not tune on a final test set; lexical similarity is not semantic equivalence."}
 

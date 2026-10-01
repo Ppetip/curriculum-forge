@@ -1,9 +1,9 @@
 # Status
 
 Stage: command-line prototype with optional live Jev integration.
-Verified: 59 tests and five offline CLI paths pass locally; all four hosted checks pass. Jev smoke results remain historical; no new live calls.
+Verified: 62 tests and five offline CLI paths pass locally; hosted checks for this change pending. Jev smoke results remain historical; no new live calls.
 
-Latest: Compare explicit lexical thresholds with error IDs, without automatic selection or application.
+Latest: Threshold comparisons score each pair once and reuse scores while preserving metrics and error IDs.
 
 Next: Obtain independent judgments for the blank pair template before tuning thresholds.
 
@@ -62,3 +62,5 @@ Threshold-comparison verification: https://github.com/Ppetip/curriculum-forge/ac
 2026-09-29 23:00 UTC: The optional local runner now exposes threshold-comparison at fixed demonstration values 0.5/0.7/1.0 with authorized --input support and private error-count summaries. No threshold is selected or recommended. All five common checks pass (312 app tests, 31 CLI paths), plus 44 shared-runner regressions. Check run 5e891ea4ba6c48658f9dcb20c00c1d26. Shared integration stays local to the AI Lab workspace; app-source hosted evidence is unchanged. Documentation-only update skips redundant CI. No live calls.
 
 2026-09-30 23:03 UTC: Shared local runner now offers Budget Cortex random-baseline with fixed seed 7, budget 22 and target 0.7; full comparisons and input origin appear in private reports. All five required common checks pass (326 app tests, 33 CLI paths), plus 50 shared-runner regressions. Check run 79735bdda73e449d86dd8b4d521efcb2. App implementation unchanged; prior exact-source hosted evidence retained and this documentation update skips redundant CI. Shared runner is local AI Lab integration, not bundled in standalone repositories. No live calls or ledger changes.
+
+2026-10-01 11:07 UTC: Threshold comparison now computes each lexical score once and reuses validated score/label records within that call. No persistent cache, schema change, automatic selection or raw-text output added. Three new regressions verify two scoring calls for two pairs across twenty thresholds with metric/error-ID parity, fresh scoring after input changes, and invalid late thresholds/labels before scoring. Existing hand-checked confusion-count and boundary tests also pass. Common check cbe849eea5bb4b858a50af0b2a61a923 passes 62 tests and five CLI paths. Hosted verification pending. No measured runtime-speedup claim, training, private-data analysis, paid calls or ledger changes.
