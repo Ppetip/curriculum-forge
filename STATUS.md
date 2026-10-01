@@ -1,7 +1,7 @@
 # Status
 
 Stage: command-line prototype with optional live Jev integration.
-Verified: 62 tests and five offline CLI paths pass locally; hosted checks for this change pending. Jev smoke results remain historical; no new live calls.
+Verified: 62 tests and five offline CLI paths pass locally; all four hosted checks pass. Jev smoke results remain historical; no new live calls.
 
 Latest: Threshold comparisons score each pair once and reuse scores while preserving metrics and error IDs.
 
@@ -63,4 +63,6 @@ Threshold-comparison verification: https://github.com/Ppetip/curriculum-forge/ac
 
 2026-09-30 23:03 UTC: Shared local runner now offers Budget Cortex random-baseline with fixed seed 7, budget 22 and target 0.7; full comparisons and input origin appear in private reports. All five required common checks pass (326 app tests, 33 CLI paths), plus 50 shared-runner regressions. Check run 79735bdda73e449d86dd8b4d521efcb2. App implementation unchanged; prior exact-source hosted evidence retained and this documentation update skips redundant CI. Shared runner is local AI Lab integration, not bundled in standalone repositories. No live calls or ledger changes.
 
-2026-10-01 11:07 UTC: Threshold comparison now computes each lexical score once and reuses validated score/label records within that call. No persistent cache, schema change, automatic selection or raw-text output added. Three new regressions verify two scoring calls for two pairs across twenty thresholds with metric/error-ID parity, fresh scoring after input changes, and invalid late thresholds/labels before scoring. Existing hand-checked confusion-count and boundary tests also pass. Common check cbe849eea5bb4b858a50af0b2a61a923 passes 62 tests and five CLI paths. Hosted verification pending. No measured runtime-speedup claim, training, private-data analysis, paid calls or ledger changes.
+2026-10-01 11:07 UTC: Threshold comparison now computes each lexical score once and reuses validated score/label records within that call. No persistent cache, schema change, automatic selection or raw-text output added. Three new regressions verify two scoring calls for two pairs across twenty thresholds with metric/error-ID parity, fresh scoring after input changes, and invalid late thresholds/labels before scoring. Existing hand-checked confusion-count and boundary tests also pass. Common check cbe849eea5bb4b858a50af0b2a61a923 passes 62 tests and five CLI paths. All four hosted Windows/Linux Python 3.11/3.13 jobs pass. No measured runtime-speedup claim, training, private-data analysis, paid calls or ledger changes.
+
+Score-reuse verification: https://github.com/Ppetip/curriculum-forge/actions/runs/36853864242
